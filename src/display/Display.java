@@ -10,6 +10,7 @@ public class Display extends Canvas {
 	private int width;
 	private int height;
 
+
 	public Display(String title, int width, int height) {
 		this.title = title;	
 		this.setWidth(width);

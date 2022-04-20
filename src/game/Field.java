@@ -1,9 +1,11 @@
 package game;
 
+import java.awt.font.LineMetrics;
 import java.util.Random;
 
 import piece.Piece;
 import piece.PieceShape;
+
 
 import java.awt.*;
 
@@ -14,6 +16,20 @@ public class Field {
 	private FieldSquare[][] field;
 	private Color[][] fieldColor;
 	private Random random;
+	private int score = 0;
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+
+
+
+
 
 	public Field(int fieldHeight, int fieldWidth) {
 		this.random = new Random();
@@ -23,6 +39,7 @@ public class Field {
 	private void initializeField(int fieldHeight, int fieldWidth) {
 		this.field = new FieldSquare[fieldHeight][fieldWidth];
 		this.fieldColor = new Color[fieldHeight][fieldWidth];
+
 
 		for (int row = 0; row < field.length; row++) {
 			for (int col = 0; col < field[0].length; col++) {
@@ -70,8 +87,9 @@ public class Field {
 				} else if (this.field[row][col].equals(FieldSquare.STACK)) {
 					g.setColor(this.fieldColor[row][col]);
 					g.fillRect(col * 30, row * 30, 30, 30);
-					g.setColor(Color.WHITE);				
+					g.setColor(Color.WHITE);
 					g.drawRect(col * 30, row * 30, 30, 30);
+
 				}				
 			}
 		}
@@ -211,6 +229,7 @@ public class Field {
 	}
 
 	public void destroyFullRows() {
+
 		for (int row = 0; row < this.field.length; row++) {
 			boolean isFullRow = true;
 			for (int col = 0; col < this.field[row].length; col++) {
@@ -222,6 +241,8 @@ public class Field {
 
 			if (isFullRow) {
 				this.shiftRows(row);
+				this.score++;
+
 			}
 		}
 	}

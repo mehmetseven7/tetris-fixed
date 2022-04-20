@@ -3,7 +3,7 @@ package piece;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import game.FieldSquare;
+
 import game.Game;
 
 public class Piece {

@@ -1,6 +1,7 @@
 package game;
 
 import display.Display;
+import org.w3c.dom.Text;
 import piece.Piece;
 import piece.PieceGenerator;
 import piece.PieceShape;
@@ -37,6 +38,10 @@ public class Game implements Runnable {
 	private PieceShape pieceShape;
 	private Piece currentPiece;
 	private Piece nextPiece;
+
+
+
+
 	
 	private boolean paused;
 
@@ -145,6 +150,10 @@ public class Game implements Runnable {
 		// Beginning of drawing things on the screen
 
 		this.graphics.drawLine(300, 0, 300, 600);
+		this.graphics.drawString("Score:" +field.getScore(),305,300);
+
+
+
 
 		this.field.render(this.graphics);
 		this.currentPiece.render(this.graphics);
@@ -241,7 +250,10 @@ public class Game implements Runnable {
 					break;
 				}
 				if(field.isPieceIntoBrick(currentPiece) && currentPiece.getY() == 0){
+
 					setRunning(false);
+
+
 				}
 				else{
 					this.tick();
