@@ -26,12 +26,13 @@ public class Field {
 
 		for (int row = 0; row < field.length; row++) {
 			for (int col = 0; col < field[0].length; col++) {
-				if (row > 8 && this.random.nextInt(11) <= 5) {
+				/*if (row > 8 && this.random.nextInt(11) <= 5) {
 					this.field[row][col] = FieldSquare.STACK;
-					this.fieldColor[row][col] = Field.FIELD_COLORS[this.random.nextInt(Field.FIELD_COLORS.length)];					
+					this.fieldColor[row][col] = Field.FIELD_COLORS[this.random.nextInt(Field.FIELD_COLORS.length)];
 				} else {
 					this.field[row][col] = FieldSquare.EMPTY;
-				}
+				}*/
+				this.field[row][col] = FieldSquare.EMPTY;
 			}
 		}
 	}

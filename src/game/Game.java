@@ -3,12 +3,13 @@ package game;
 import display.Display;
 import piece.Piece;
 import piece.PieceGenerator;
+import piece.PieceShape;
 import states.*;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class Game {
+public class Game implements Runnable {
 
 	private static final int NEXT_PIECE_X = 11;
 	private static final int NEXT_PIECE_Y = 1;
@@ -33,7 +34,7 @@ public class Game {
 	private State menuState;
 	private State settingsState;
 	private Field field;
-	
+	private PieceShape pieceShape;
 	private Piece currentPiece;
 	private Piece nextPiece;
 	
@@ -46,7 +47,7 @@ public class Game {
 		
 		this.setCurrentPiece(PieceGenerator.generatePiece());
 		this.setNextPiece(PieceGenerator.generatePiece(Game.NEXT_PIECE_X, Game.NEXT_PIECE_Y));
-	}		
+	}
 
 	private String getTitle() {
 		return title;
@@ -162,21 +163,7 @@ public class Game {
 		this.graphics.dispose();
 	}
 	
-	public void run() {
-		this.init();
-		
-		while (this.isRunning()) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				break;
-			}
 
-			this.tick();
-			this.render();
-		}
-	}
 
 	public void pause() {
 		this.paused = true;
@@ -237,5 +224,31 @@ public class Game {
 				this.render();
 			}
 		}
+	}
+
+
+	@Override
+	public void run() {
+
+			this.init();
+
+			while (this.isRunning()) {
+
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					break;
+				}
+				if(field.isPieceIntoBrick(currentPiece) && currentPiece.getY() == 0){
+					setRunning(false);
+				}
+				else{
+					this.tick();
+					this.render();
+				}
+			}
+
+
 	}
 }
